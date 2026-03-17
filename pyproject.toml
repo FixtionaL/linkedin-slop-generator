@@ -1,0 +1,11 @@
+[project]
+name = "linkedin-slop-generator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "clipboard>=0.0.4",
+    "groq>=1.1.1",
+    "streamlit>=1.55.0",
+]

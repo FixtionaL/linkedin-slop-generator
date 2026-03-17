@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from groq import Groq
-import clipboard
+from st_copy_to_clipboard import st_copy_to_clipboard
 
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
@@ -47,10 +47,8 @@ if st.button("Convert"):
         output = generate_slop(input_text)
     if output is None:
         st.error("A problem occured, please try again.")
-        st.stop()
-
-    st.markdown("### Output:")
-    with st.container(border=True):
-        st.markdown(output)
-    if st.button("Copy 📋"):
-        clipboard.copy(output)
+    else:
+        st.markdown("### Output:")
+        with st.container(border=True):
+            st.markdown(output)
+        st_copy_to_clipboard(output, "Copy 📋", "Copied ✅")

@@ -3,13 +3,12 @@ import streamlit as st
 from groq import Groq
 from st_copy_to_clipboard import st_copy_to_clipboard
 
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-
 st.set_page_config(page_title="English -> LinkedIn")
 
 st.title("English → LinkedIn")
 st.text("Convert text into LinkedIn Slop")
 
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 input_text = st.text_area("Enter your sentence:")
 
 STYLE_PROMPT = """
@@ -26,6 +25,7 @@ Rules:
 - Add multiple hashtags
 """
 
+@st.cache_data
 def generate_slop(text: str) -> str | None:
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
